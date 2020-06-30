@@ -20,7 +20,6 @@
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 	<xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
 
-
 	<!-- ***************** -->
 	<!-- Global parameters -->
 	<!-- ***************** -->
@@ -62,6 +61,19 @@
 	<xacro:rear_wheel lr_prefix="left" fr_prefix="rear" lr_reflect="1" fr_reflect="-1" parent="base_link" />
 	<xacro:rear_wheel lr_prefix="right" fr_prefix="rear" lr_reflect="-1" fr_reflect="-1" parent="base_link" />
 
+	<!-- Ground truth plugin -->
+	<gazebo>
+		<plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+			<alwaysOn>true</alwaysOn>
+			<updateRate>50.0</updateRate>
+			<bodyName>base_link</bodyName>
+			<topicName>ground_truth/state</topicName>
+			<gaussianNoise>0.01</gaussianNoise>
+			<frameName>map</frameName>
+			<xyzOffsets>0 0 0</xyzOffsets>
+			<rpyOffsets>0 0 0</rpyOffsets>
+		</plugin>
+	</gazebo>
 
 	<!-- SENSORS -->
 	<!-- 
@@ -70,7 +82,8 @@
 	</xacro:sensor_velodyne_vlp16> -->
 
 	<VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points" hz="10" samples="440" min_range="0.9" max_range="100.0" gpu="false">
-		<origin xyz="1.19 0.0 1.54" rpy="0 0.24396 0" /> <!-- 13.97787837 deg -->
+		<origin xyz="1.19 0.0 1.55" rpy="0 0.24396 0" />
+		<!-- 13.97787837 deg -->
 	</VLP-16>
 
 	<xacro:sensor_rubedos_viper prefix="viper" parent="base_link">
