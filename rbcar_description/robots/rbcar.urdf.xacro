@@ -18,6 +18,8 @@
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+	<xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
+
 
 	<!-- ***************** -->
 	<!-- Global parameters -->
@@ -62,9 +64,14 @@
 
 
 	<!-- SENSORS -->
+	<!-- 
 	<xacro:sensor_velodyne_vlp16 prefix="front_3d_lidar" parent="base_link" range_min="0.8" range_max="31.0" gpu="false">
 		<origin xyz="1.19 0.0 1.54" rpy="0 0.24396 0"/>
-	</xacro:sensor_velodyne_vlp16>
+	</xacro:sensor_velodyne_vlp16> -->
+
+	<VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points" hz="10" samples="440" min_range="0.9" max_range="100.0" gpu="false">
+		<origin xyz="1.19 0.0 1.54" rpy="0 0.24396 0" /> <!-- 13.97787837 deg -->
+	</VLP-16>
 
 	<xacro:sensor_rubedos_viper prefix="viper" parent="base_link">
 		<origin xyz="1.58 0.0 0.87" rpy="0 0 0.0"/>

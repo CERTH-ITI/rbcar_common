@@ -10,7 +10,7 @@
  
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg robot_xacro_path) gps_latitude:='$(arg gps_latitude)' gps_longitude:='$(arg gps_longitude)'" />
   <!-- Combine joint values -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
   
 </launch>
 
