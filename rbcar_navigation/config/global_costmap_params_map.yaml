@@ -1,12 +1,38 @@
 global_costmap:
   global_frame: map
   robot_base_frame: base_link
-  update_frequency: 5.0
+  update_frequency: 1.0
+  # publish_frequency: 10.0
+  transform_tolerance: 0.5
+  # static_map: true
+  rolling_window: false
+  width: 200.0
+  height: 200.0
+  resolution: 0.5
+  origin_x: -100.0
+  origin_y: -100.0
+
   # robot radius +safety_delta 0.25 + 0.02
   # set to permit drawing a trajectory through the narrowest door
-  inflation_radius: 0.20  
+  inflation_radius: 0.50
   plugins:
-  - {name: static_layer,        type: "costmap_2d::StaticLayer" }
+    - {name: static_layer,        type: "costmap_2d::StaticLayer" }
+    - { name: obstacle_layer, type: "costmap_2d::VoxelLayer" }
+    - { name: inflation_layer, type: "costmap_2d::InflationLayer" }
 
-  static_map:
-    static_map: true  
+  inflation_layer:
+    enabled: true
+    cost_scaling_factor: 0.1 # the lower, the more cost
+    inflation_radius: 0.5 # big values make it harder to pass through narrow spaces
+
+  static_layer:
+    unknown_cost_value:         255
+    lethal_cost_threshold:      150
+    map_topic:                  "map"
+    first_map_only:             false
+    subscribe_to_updates:       true
+    track_unknown_space:        true
+    use_maximum:                true
+    trinary_costmap:            true
+    ## Misc ##
+    enabled:                    true

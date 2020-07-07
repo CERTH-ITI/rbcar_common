@@ -1,14 +1,14 @@
 global_costmap:
   publish_voxel_map: true
-  global_frame: world
+  global_frame: map
   robot_base_frame: base_link
   update_frequency: 5.0
-  publish_frequency: 1.0
-  static_map: true
+  publish_frequency: 10.0
+  # static_map: true
   rolling_window: false
   width:  2000.0
   height: 2000.0
-  resolution: 1.0
+  resolution: 0.2
   origin_x: -1000.0
   origin_y: -1000.0
 
@@ -19,9 +19,9 @@ global_costmap:
       type: "costmap_2d::InflationLayer"
 
   inflation_layer:
-    enabled: false
+    enabled: true
     cost_scaling_factor: 1.0 # the lower, the more cost
     inflation_radius: 0.5 # big values make it harder to pass through narrow spaces
   
   obstacle_layer:
-    enabled: false
+    enabled: true

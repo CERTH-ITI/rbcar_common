@@ -4,7 +4,7 @@ base_global_planner: SBPLLatticePlanner
 SBPLLatticePlanner:
   environment_type: XYThetaLattice # only supported value
   planner_type: ARAPlanner # ARAPlanner or ADPlanner
-  allocated_time: 10.0 # time to find a solution. if solution is found before, then it will be optimized until time runs out. if no solution is found, aborts
+  allocated_time: 5.0 # time to find a solution. if solution is found before, then it will be optimized until time runs out. if no solution is found, aborts
   initial_epsilon: 3.0 # the bigger, the faster and less optimal solution will be found.
   forward_search: false # search in solution space. important for ADPlanner, useless for ARAPlanner
   primitive_filename: "" # absolute path for primitives file. better if overwrited in launch file with $(find)

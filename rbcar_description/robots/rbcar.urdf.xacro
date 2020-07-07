@@ -81,8 +81,8 @@
 		<origin xyz="1.19 0.0 1.54" rpy="0 0.24396 0"/>
 	</xacro:sensor_velodyne_vlp16> -->
 
-	<VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points" hz="10" samples="440" min_range="0.9" max_range="100.0" gpu="false">
-		<origin xyz="1.19 0.0 1.55" rpy="0 0.24396 0" />
+	<VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points" hz="10" samples="440" min_range="0.9" max_range="100.0" gpu="true">
+		<origin xyz="1.19 0.0 1.55" rpy="0 0.24396 0" /> <!-- 0.24396 -->
 		<!-- 13.97787837 deg -->
 	</VLP-16>
 
@@ -94,9 +94,9 @@
 		<origin xyz="0.0 0.0 0.170" rpy="0 0 0"/>
 	</xacro:sensor_imu_hector>
 
-	<xacro:sensor_sick_s300 prefix="front_laser" parent="base_link" prefix_topic="front_laser" min_angle="-1.5" max_angle="1.5" gpu="false">
+	<xacro:sensor_sick_microscan3 prefix="front_laser" parent="base_link" prefix_topic="front_laser" max_angle="2.3562" min_angle="-2.3562">
 		<origin xyz="2.2 0 0.3" rpy="0 0 0"/>
-	</xacro:sensor_sick_s300>
+	</xacro:sensor_sick_microscan3>
 
 	<xacro:sensor_gps prefix="gps" parent="base_link" gps_latitude="$(arg gps_latitude)" gps_longitude="$(arg gps_longitude)">
 		<origin xyz="0.0 0 0.45" rpy="0 0 0"/>
