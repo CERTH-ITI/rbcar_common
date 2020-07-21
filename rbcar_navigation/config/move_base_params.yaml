@@ -1,9 +1,6 @@
-controller_frequency: 10.0
-controller_patience: 30.0 
+# base_global_planner: "global_planner/GlobalPlanner"
+base_local_planner: "teb_local_planner/TebLocalPlannerROS"
 
-conservative_reset_dist: 3.0
-recovery_behavior_enabled: true
-clearing_rotation_allowed: false
-shutdown_costmaps: false
-oscillation_timeout: 10.0
-oscillation_distance: 0.5
+controller_frequency: 10
+controller_patience: 15.0 
+
