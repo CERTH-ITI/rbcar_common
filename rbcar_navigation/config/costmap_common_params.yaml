@@ -1,32 +1,37 @@
-#---standard pioneer footprint---
 #---(in meters)---
-#footprint: [ [0.254, -0.0508], [0.1778, -0.0508], [0.1778, -0.1778], [-0.1905, -0.1778], [-0.254, 0], [-0.1905, 0.1778], [0.1778, 0.1778], [0.1778, 0.0508], [0.254, 0.0508] ]
-footprint: [[2.400, -1.0], [2.400, 1], [-0.400, 1.0], [-0.400, -1]]
+footprint: [[2.400, -0.8], [2.400, 0.8], [-0.400, 0.8], [-0.400, -0.8]]
 
 transform_tolerance: 0.2
 map_type: costmap
 
 obstacle_layer:
   enabled: true
-  obstacle_range: 3.0
-  raytrace_range: 3.5
+  obstacle_range: 15.0
+  raytrace_range: 15.0
   inflation_radius: 0.2
   track_unknown_space: false
   combination_method: 1
 
-  observation_sources: laser_scan_sensor
-  laser_scan_sensor:
+  observation_sources: front_laser_scan_sensor rear_laser_scan_sensor
+  front_laser_scan_sensor:
     {
       data_type: LaserScan,
       topic: front_laser/scan,
       marking: true,
       clearing: true,
     }
+  rear_laser_scan_sensor:
+    {
+      data_type: LaserScan,
+      topic: rear_laser/scan,
+      marking: true,
+      clearing: true,
+    }
 
 inflation_layer:
   enabled: true
-  cost_scaling_factor: 5.0 #10.0 # exponential rate at which the obstacle cost drops off (default: 10)
-  inflation_radius: 0.15 # 0.5 # max. distance from an obstacle at which costs are incurred for planning paths.
+  cost_scaling_factor: 2.0 #10.0 # exponential rate at which the obstacle cost drops off (default: 10)
+  inflation_radius: 2.0 #0.15 # 0.5 # max. distance from an obstacle at which costs are incurred for planning paths.
 
 static_layer:
   enabled: true

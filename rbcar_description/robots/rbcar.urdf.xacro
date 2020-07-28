@@ -61,7 +61,7 @@
 	<xacro:rear_wheel lr_prefix="left" fr_prefix="rear" lr_reflect="1" fr_reflect="-1" parent="base_link" />
 	<xacro:rear_wheel lr_prefix="right" fr_prefix="rear" lr_reflect="-1" fr_reflect="-1" parent="base_link" />
 
-	<!-- Ground truth plugin -->
+	<!-- Ground truth plugin-->
 	<gazebo>
 		<plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
 			<alwaysOn>true</alwaysOn>
@@ -73,15 +73,10 @@
 			<xyzOffsets>0 0 0</xyzOffsets>
 			<rpyOffsets>0 0 0</rpyOffsets>
 		</plugin>
-	</gazebo>
+	</gazebo> 
 
 	<!-- SENSORS -->
-	<!-- 
-	<xacro:sensor_velodyne_vlp16 prefix="front_3d_lidar" parent="base_link" range_min="0.8" range_max="31.0" gpu="false">
-		<origin xyz="1.19 0.0 1.54" rpy="0 0.24396 0"/>
-	</xacro:sensor_velodyne_vlp16> -->
-
-	<VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points" hz="10" samples="440" min_range="0.9" max_range="100.0" gpu="true">
+	<VLP-16 parent="base_link" name="velodyne" topic="/points_raw" hz="10" samples="440" min_range="0.9" max_range="100.0" gpu="true">
 		<origin xyz="1.19 0.0 1.55" rpy="0 0.24396 0" />
 		<!-- 0.24396 == 13.97787837 deg -->
 	</VLP-16>
@@ -97,7 +92,8 @@
 
 	<!-- Rear -->
 	<xacro:sensor_rubedos_viper prefix="rear_viper" parent="base_link">
-		<origin xyz="-0.15 0.0 0.475" rpy="0 0 3.14159"/>
+		<origin xyz="0.42 0.0 1.55" rpy="0 0.24396 3.14159"/>
+		<!-- <origin xyz="-0.15 0.0 0.475" rpy="0 0 3.14159"/> -->
 	</xacro:sensor_rubedos_viper>
 
 	<xacro:sensor_sick_microscan3 prefix="rear_laser" parent="base_link" prefix_topic="rear_laser" max_angle="1.309" min_angle="-1.309">

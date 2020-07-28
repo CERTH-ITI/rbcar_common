@@ -1,6 +1,5 @@
-# base_global_planner: "global_planner/GlobalPlanner"
 base_local_planner: "teb_local_planner/TebLocalPlannerROS"
 
-controller_frequency: 10
-controller_patience: 15.0 
+controller_frequency: 7.0
+controller_patience: 7.5 
 
