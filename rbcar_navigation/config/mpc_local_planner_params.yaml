@@ -8,8 +8,8 @@ MpcLocalPlannerROS:
     simple_car:
       wheelbase: 1.8
       front_wheel_driving: False
-      max_vel_x: 0.4
-      max_vel_x_backwards: 0.2
+      max_vel_x: 1.0
+      max_vel_x_backwards: 0.5
       max_steering_angle: 1.4
       acc_lim_x: 0.5 # deactive bounds with zero
       dec_lim_x: 0.5 # deactive bounds with zero
