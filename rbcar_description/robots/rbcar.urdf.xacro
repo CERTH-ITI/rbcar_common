@@ -18,6 +18,7 @@
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+	<xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
 
 	<!-- ***************** -->
 	<!-- Global parameters -->
@@ -63,23 +64,47 @@
     <xacro:rear_wheel lr_prefix="right" fr_prefix="rear"
                       lr_reflect="-1" fr_reflect="-1" parent="base_link" />
 
+	<!-- Ground truth plugin-->
+	<gazebo>
+		<plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+			<alwaysOn>true</alwaysOn>
+			<updateRate>50.0</updateRate>
+			<bodyName>base_link</bodyName>
+			<topicName>ground_truth/state</topicName>
+			<gaussianNoise>0.01</gaussianNoise>
+			<frameName>map</frameName>
+			<xyzOffsets>0 0 0</xyzOffsets>
+			<rpyOffsets>0 0 0</rpyOffsets>
+		</plugin>
+	</gazebo> 
 
 	<!-- SENSORS -->
-  <!--xacro:sensor_benewake_ce30d prefix="front_3d_lidar" parent="base_link" gpu="true">
-      <origin xyz="2.155 0.0 0.236" rpy="0 0.24396 0"/>
-  </xacro:sensor_benewake_ce30d-->
+	<VLP-16 parent="base_link" name="velodyne" topic="/points_raw" hz="10" samples="440" min_range="0.9" max_range="100.0" gpu="true">
+		<origin xyz="1.19 0.0 1.55" rpy="0 0.24396 0" />
+		<!-- 0.24396 == 13.97787837 deg -->
+	</VLP-16>
 
-  <xacro:sensor_velodyne_vlp16 prefix="front_3d_lidar" parent="base_link" range_min="0.8" range_max="31.0" gpu="false">
-      <origin xyz="2.155 0.0 0.236" rpy="0 0.24396 0"/>
-  </xacro:sensor_velodyne_vlp16>
+	<!-- Front -->
+	<xacro:sensor_rubedos_viper prefix="front_viper" parent="base_link">
+		<origin xyz="1.58 0.0 0.87" rpy="0 0 0.0"/>
+	</xacro:sensor_rubedos_viper>
 
-  <xacro:sensor_rubedos_viper prefix="viper" parent="base_link">
-    <origin xyz="1.289 0.0 1.354" rpy="0 0.1745 0.0"/>
+	<xacro:sensor_sick_microscan3 prefix="front_laser" parent="base_link" prefix_topic="front_laser" max_angle="1.5708" min_angle="-1.5708">		<!-- initial angle value was : 2.3562 -->
+		<origin xyz="2.2 0 0.3" rpy="0 0 0"/>
+	</xacro:sensor_sick_microscan3>
+
+	<!-- Rear -->
+	<xacro:sensor_rubedos_viper prefix="rear_viper" parent="base_link">
+		<origin xyz="0.42 0.0 1.55" rpy="0 0.24396 3.14159"/>
+		<!-- <origin xyz="-0.15 0.0 0.475" rpy="0 0 3.14159"/> -->
   </xacro:sensor_rubedos_viper>
+
+	<xacro:sensor_sick_microscan3 prefix="rear_laser" parent="base_link" prefix_topic="rear_laser" max_angle="1.309" min_angle="-1.309">
+		<origin xyz="-0.24 0 0.00" rpy="0 0 3.14159"/>
+	</xacro:sensor_sick_microscan3> <!-- 150 degrees -->
 
 	<xacro:sensor_imu_hector prefix="imu" parent="base_link">
 		<origin xyz="0.0 0.0 0.170" rpy="0 0 0"/>
-		<!--<origin xyz="0.917 0.0 0.170" rpy="0 0 0"/>-->
 	</xacro:sensor_imu_hector>
 
   <!--xacro:sensor_sick_s300 prefix="front_laser" parent="base_link" prefix_topic="front_laser" min_angle="-1.5" max_angle="1.5" gpu="false">

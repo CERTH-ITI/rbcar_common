@@ -23,3 +23,14 @@ global_costmap:
 #  obstacle_layer:
 #    enabled: true
 
+###############
+  # update_frequency: 1.0
+  # publish_frequency: 1.0
+  # static_map: true
+  # resolution: 0.1
+
+  # transform_tolerance: 0.5
+  # plugins:
+  #   - { name: static_layer, type: "costmap_2d::StaticLayer" }
+  #   - { name: obstacle_layer, type: "costmap_2d::VoxelLayer" }
+  #   - { name: inflation_layer, type: "costmap_2d::InflationLayer" }
