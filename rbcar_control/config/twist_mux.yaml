@@ -10,7 +10,7 @@ topics:
   priority: 50
 
 - name    : mpc
-  topic   : denmpc/cmd_vel
+  topic   : controller/cmd_vel
   timeout : 0.5
   priority: 50
 
