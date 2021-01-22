@@ -14,12 +14,12 @@
     <transmission name="${prefix}_transmission">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}_joint">
-        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}_actuator">
         <!-- This hardwareInterface element exists for compatibility
               with ROS Hydro. -->
-        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>

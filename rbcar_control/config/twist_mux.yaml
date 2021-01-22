@@ -9,7 +9,7 @@ topics:
   timeout : 0.5
   priority: 50
 
-- name    : mpc
+- name    : controller
   topic   : controller/cmd_vel
   timeout : 0.5
   priority: 50
